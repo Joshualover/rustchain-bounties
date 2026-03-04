@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RustChain v2 API Documentation</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@5.9.0/swagger-ui.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .topbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: white;
+        }
+        .topbar h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .topbar p {
+            margin: 8px 0 0 0;
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        #swagger-ui {
+            max-width: 1460px;
+            margin: 0 auto;
+        }
+        .info-title {
+            color: #667eea !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <h1>🦀 RustChain v2 API Documentation</h1>
+        <p>Complete API reference for RustChain v2 Integrated Server - Epoch Rewards, Withdrawals, Finality, Hardware Attestation, P2P and more</p>
+    </div>
+    <div id="swagger-ui"></div>
+
+    <script src="https://unpkg.com/swagger-ui-dist@5.9.0/swagger-ui-bundle.js"></script>
+    <script src="https://unpkg.com/swagger-ui-dist@5.9.0/swagger-ui-standalone-preset.js"></script>
+    <script>
+        window.onload = function() {
+            const ui = SwaggerUIBundle({
+                url: './openapi-full.json',
+                dom_id: '#swagger-ui',
+                deepLinking: true,
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIStandalonePreset
+                ],
+                plugins: [
+                    SwaggerUIBundle.plugins.DownloadUrl
+                ],
+                layout: "StandaloneLayout",
+                validatorUrl: null,
+                displayRequestDuration: true,
+                filter: true,
+                showExtensions: true,
+                showCommonExtensions: true,
+                defaultModelsExpandDepth: 1,
+                defaultModelExpandDepth: 1,
+                docExpansion: "list",
+                tagsSorter: "alpha",
+                operationsSorter: "alpha"
+            });
+
+            window.ui = ui;
+
+            // 加载统计信息
+            fetch('./openapi-full.json')
+                .then(r => r.json())
+                .then(spec => {
+                    const paths = Object.keys(spec.paths);
+                    const endpoints = paths.reduce((acc, path) => {
+                        return acc + Object.keys(spec.paths[path]).length;
+                    }, 0);
+                    console.log(`📊 Loaded ${paths.length} paths, ${endpoints} endpoints`);
+                });
+        };
+    </script>
+</body>
+</html>

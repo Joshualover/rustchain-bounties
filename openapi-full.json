@@ -1,0 +1,1062 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "RustChain v2 API",
+    "version": "2.1.0-rip8",
+    "description": "RustChain v2 Integrated Server API - 完整的节点 API 文档，包含 Epoch Rewards、Withdrawals、Finality、Hardware Attestation、P2P 等功能"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8099",
+      "description": "Local development server"
+    },
+    {
+      "url": "https://rustchain.io",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "epoch",
+      "description": "Epoch and slot management"
+    },
+    {
+      "name": "withdraw",
+      "description": "RTC withdrawal operations"
+    },
+    {
+      "name": "attest",
+      "description": "Hardware attestation"
+    },
+    {
+      "name": "api",
+      "description": "General API endpoints"
+    },
+    {
+      "name": "admin",
+      "description": "Admin operations"
+    },
+    {
+      "name": "gov",
+      "description": "Governance operations"
+    },
+    {
+      "name": "miner",
+      "description": "Miner operations"
+    },
+    {
+      "name": "hall-of-fame",
+      "description": "Hall of Fame pages"
+    },
+    {
+      "name": "museum",
+      "description": "Hardware museum"
+    },
+    {
+      "name": "health",
+      "description": "Health check endpoints"
+    },
+    {
+      "name": "metrics",
+      "description": "Prometheus metrics"
+    },
+    {
+      "name": "explorer",
+      "description": "Blockchain explorer"
+    }
+  ],
+  "paths": {
+    "/admin/oui_deny/add": {
+      "post": {
+        "summary": "Add OUI deny entry",
+        "tags": [
+          "admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/oui_deny/enforce": {
+      "post": {
+        "summary": "Enforce OUI deny list",
+        "tags": [
+          "admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/oui_deny/list": {
+      "get": {
+        "summary": "List OUI deny entries",
+        "tags": [
+          "admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/admin/oui_deny/remove": {
+      "post": {
+        "summary": "Remove OUI deny entry",
+        "tags": [
+          "admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/badge/{miner_id}": {},
+    "/api/balances": {},
+    "/api/bounty-multiplier": {},
+    "/api/fee_pool": {},
+    "/api/mine": {
+      "post": {
+        "summary": "Submit mining work",
+        "tags": [
+          "api"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/miner/{miner_id}/attestations": {},
+    "/api/miner_dashboard/{miner_id}": {
+      "get": {
+        "summary": "Get miner dashboard data",
+        "tags": [
+          "miner"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "miner_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/miners": {},
+    "/api/nodes": {
+      "get": {
+        "summary": "List active nodes",
+        "tags": [
+          "api"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/api/stats": {
+      "get": {
+        "summary": "Get system statistics",
+        "tags": [
+          "api"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/attest/challenge": {
+      "post": {
+        "summary": "Get hardware attestation challenge",
+        "tags": [
+          "attest"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/attest/submit": {
+      "post": {
+        "summary": "Submit hardware attestation proof",
+        "tags": [
+          "attest"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/balance/{miner_pk}": {
+      "get": {
+        "summary": "Get miner balance",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "miner_pk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/beacon/digest": {},
+    "/beacon/envelopes": {},
+    "/beacon/submit": {},
+    "/compat/v1/api/mine": {
+      "post": {
+        "summary": "POST /compat/v1/api/mine",
+        "tags": [
+          "api"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard": {},
+    "/download/installer": {
+      "get": {
+        "summary": "GET /download/installer",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/download/miner": {
+      "get": {
+        "summary": "GET /download/miner",
+        "tags": [
+          "miner"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/download/test": {
+      "get": {
+        "summary": "GET /download/test",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/download/test-bat": {
+      "get": {
+        "summary": "GET /download/test-bat",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/download/uninstaller": {
+      "get": {
+        "summary": "GET /download/uninstaller",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/downloads": {
+      "get": {
+        "summary": "GET /downloads",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/epoch": {
+      "get": {
+        "summary": "Get current epoch information",
+        "tags": [
+          "epoch"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/epoch/enroll": {
+      "post": {
+        "summary": "Enroll miner in current epoch",
+        "tags": [
+          "epoch"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/explorer": {
+      "get": {
+        "summary": "Blockchain explorer",
+        "tags": [
+          "explorer"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/genesis/export": {
+      "get": {
+        "summary": "Export genesis state",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/gov/rotate/approve": {
+      "post": {
+        "summary": "Approve key rotation",
+        "tags": [
+          "gov"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gov/rotate/commit": {
+      "post": {
+        "summary": "Commit key rotation",
+        "tags": [
+          "gov"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gov/rotate/stage": {
+      "post": {
+        "summary": "Stage key rotation",
+        "tags": [
+          "gov"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hall-of-fame/": {},
+    "/hall-of-fame/index.html": {},
+    "/hall-of-fame/machine.html": {},
+    "/headers/ingest_signed": {
+      "post": {
+        "summary": "Ingest signed headers",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/headers/tip": {
+      "get": {
+        "summary": "Get chain tip",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health check endpoint",
+        "tags": [
+          "health"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/light": {
+      "get": {
+        "summary": "Light client endpoint",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/lottery/eligibility": {
+      "get": {
+        "summary": "Check lottery eligibility",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "summary": "Prometheus metrics endpoint",
+        "tags": [
+          "metrics"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/metrics_mac": {
+      "get": {
+        "summary": "Prometheus metrics for macOS",
+        "tags": [
+          "metrics"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/miner/headerkey": {
+      "post": {
+        "summary": "Submit miner header key",
+        "tags": [
+          "miner"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/museum": {},
+    "/museum/3d": {},
+    "/openapi.json": {
+      "get": {
+        "summary": "OpenAPI specification",
+        "tags": [
+          "explorer"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/ops/attest/debug": {
+      "post": {
+        "summary": "Debug attestation",
+        "tags": [
+          "attest"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ops/oui/enforce": {
+      "get": {
+        "summary": "Get OUI enforcement status",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/ops/readiness": {
+      "get": {
+        "summary": "Get operational readiness",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/p2p/add_peer": {
+      "post": {
+        "summary": "POST /p2p/add_peer",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p2p/blocks": {
+      "get": {
+        "summary": "GET /p2p/blocks",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/p2p/ping": {
+      "post": {
+        "summary": "POST /p2p/ping",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p2p/stats": {
+      "get": {
+        "summary": "GET /p2p/stats",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/pending/confirm": {
+      "post": {
+        "summary": "POST /pending/confirm",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pending/integrity": {
+      "get": {
+        "summary": "GET /pending/integrity",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/pending/list": {
+      "get": {
+        "summary": "GET /pending/list",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/pending/void": {
+      "post": {
+        "summary": "POST /pending/void",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ready": {
+      "get": {
+        "summary": "Readiness check endpoint",
+        "tags": [
+          "health"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/rewards/settle": {
+      "post": {
+        "summary": "POST /rewards/settle",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wallet/balance": {
+      "get": {
+        "summary": "GET /wallet/balance",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/wallet/balances/all": {
+      "get": {
+        "summary": "GET /wallet/balances/all",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/wallet/ledger": {
+      "get": {
+        "summary": "GET /wallet/ledger",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/wallet/resolve": {},
+    "/wallet/transfer": {
+      "post": {
+        "summary": "POST /wallet/transfer",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wallet/transfer/signed": {},
+    "/wallet/transfer_OLD_DISABLED": {
+      "post": {
+        "summary": "POST /wallet/transfer_OLD_DISABLED",
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/withdraw/history/{miner_pk}": {
+      "get": {
+        "summary": "Get withdrawal history",
+        "tags": [
+          "withdraw"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "miner_pk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/withdraw/register": {
+      "post": {
+        "summary": "Register SR25519 key for withdrawals",
+        "tags": [
+          "withdraw"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/withdraw/request": {
+      "post": {
+        "summary": "Request RTC withdrawal",
+        "tags": [
+          "withdraw"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/withdraw/status/{withdrawal_id}": {
+      "get": {
+        "summary": "Get withdrawal status",
+        "tags": [
+          "withdraw"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "withdrawal_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
